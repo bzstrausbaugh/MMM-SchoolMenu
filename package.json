@@ -1,0 +1,9 @@
+{
+  "name": "mmm-cgm",
+  "version": "1.0.0",
+  "description": "MagicMirror 2 module to show current cgm value.",
+  "dependencies": {
+    "undici": "^7.16.0",
+    "dayjs": "^1.11.18"
+  }
+}

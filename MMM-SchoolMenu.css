@@ -1,0 +1,29 @@
+.MMM-SchoolMenu .column {
+  width: 300px;
+  padding-right: 20px;
+  vertical-align: top;
+}
+
+.MMM-SchoolMenu .week {
+  vertical-align: top;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.MMM-SchoolMenu .header {
+  font-size: var(--font-size-medium);
+  padding-top: 5px;
+  text-decoration: underline;
+  font-weight: bolder;
+}
+
+.MMM-SchoolMenu .day {
+  font-size: var(--font-size-small);
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.MMM-SchoolMenu .item {
+  font-size: var(--font-size-small);
+}
