@@ -1,4 +1,7 @@
 function updateMenus(payload) {
+  const wrapper = document.getElementById('school-menu-wrapper');
+  wrapper.innerHTML =
+    '<table><tr><td class="column"><div id="thisweek" class="week"/></td><td class="column"><div id="nextweek" class="week"/></td></tr>';
   let thisWeekDiv = document.getElementById('thisweek');
   const header1 = document.createElement('div');
   header1.id = `week-0`;
