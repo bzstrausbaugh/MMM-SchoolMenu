@@ -57,7 +57,7 @@ Module.register('MMM-SchoolMenu', {
     const now = dayjs();
     const nextDay = now.add(1, 'day').startOf('day');
 
-    setTimeout(_this.getMenus, nextDay.diff(now), _this);
+    setTimeout(_this.getMenus, 60 * 60 * 1000, _this);
   },
 
   getScripts: function () {
