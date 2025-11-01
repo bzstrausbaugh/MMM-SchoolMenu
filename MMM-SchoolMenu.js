@@ -6,7 +6,7 @@ function updateMenus(payload) {
   const header1 = document.createElement('div');
   header1.id = `week-0`;
   header1.classList.add('header');
-  header1.innerHTML = `Week of ${payload.thisWeek.weekOf}`;
+  header1.innerHTML = `${payload.thisWeek.weekOf}`;
   thisWeekDiv.appendChild(header1);
   payload.thisWeek.menu.forEach((day, index) => {
     const dayDiv = document.createElement('div');
@@ -27,7 +27,7 @@ function updateMenus(payload) {
   const header2 = document.createElement('div');
   header2.id = `week-1`;
   header2.classList.add('header');
-  header2.innerHTML = `Week of ${payload.nextWeek.weekOf}`;
+  header2.innerHTML = `${payload.nextWeek.weekOf}`;
   nextWeekDiv.appendChild(header2);
 
   payload.nextWeek.menu.forEach((day, index) => {
