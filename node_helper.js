@@ -92,8 +92,18 @@ module.exports = NodeHelper.create({
       getMenuForWeek(payload.locationId, nextMonday),
     ]).then((menus) => {
       _this.sendSocketNotification('GOT_WEEKLY_MENUS', {
-        thisWeek: { weekOf: monday.format('MMM DD, YYYY'), menu: menus[0] },
-        nextWeek: { weekOf: nextMonday.format('MMM DD, YYYY'), menu: menus[1] },
+        thisWeek: {
+          weekOf: `${monday.format('MM/DD/YYYY')} - ${thisWeek
+            .add(5, 'd')
+            .format('MM/DD/YYYY')}`,
+          menu: menus[0],
+        },
+        nextWeek: {
+          weekOf: `${nextMonday.format('MM/DD/YYYY')} - ${nextMonday
+            .add(5, 'd')
+            .format('MM/DD/YYYY')}`,
+          menu: menus[1],
+        },
       });
     });
   },
