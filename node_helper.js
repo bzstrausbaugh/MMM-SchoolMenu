@@ -93,15 +93,15 @@ module.exports = NodeHelper.create({
     ]).then((menus) => {
       _this.sendSocketNotification('GOT_WEEKLY_MENUS', {
         thisWeek: {
-          weekOf: `${monday.format('MM/DD/YYYY')} - ${thisWeek
+          weekOf: `${monday.format('MM/DD')} - ${thisWeek
             .add(5, 'd')
-            .format('MM/DD/YYYY')}`,
+            .format('MM/DD')}`,
           menu: menus[0],
         },
         nextWeek: {
-          weekOf: `${nextMonday.format('MM/DD/YYYY')} - ${nextMonday
+          weekOf: `${nextMonday.format('MM/DD')} - ${nextMonday
             .add(5, 'd')
-            .format('MM/DD/YYYY')}`,
+            .format('MM/DD')}`,
           menu: menus[1],
         },
       });
