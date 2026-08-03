@@ -14,13 +14,21 @@ function updateMenus(payload) {
     dayDiv.classList.add('day');
     dayDiv.innerHTML = dayjs(day.date).format('dddd');
     thisWeekDiv.appendChild(dayDiv);
-    day.items.forEach((item, itemIdx) => {
+    if (day.holiday) {
       const lunchDiv = document.createElement('div');
       lunchDiv.id = `lunch-0-${index}-${itemIdx}`;
       lunchDiv.classList.add('item');
-      lunchDiv.innerHTML = item;
+      lunchDiv.innerHTML = 'No School - Holiday';
       thisWeekDiv.appendChild(lunchDiv);
-    });
+    } else {
+      day.items.forEach((item, itemIdx) => {
+        const lunchDiv = document.createElement('div');
+        lunchDiv.id = `lunch-0-${index}-${itemIdx}`;
+        lunchDiv.classList.add('item');
+        lunchDiv.innerHTML = item.food.name;
+        thisWeekDiv.appendChild(lunchDiv);
+      });
+    }
   });
 
   let nextWeekDiv = document.getElementById('nextweek');
@@ -29,18 +37,27 @@ function updateMenus(payload) {
   header2.classList.add('header');
   header2.innerHTML = `${payload.nextWeek.weekOf}`;
   nextWeekDiv.appendChild(header2);
-
   payload.nextWeek.menu.forEach((day, index) => {
     const dayDiv = document.createElement('div');
     dayDiv.id = `day-1-${index}`;
     dayDiv.classList.add('day');
     dayDiv.innerHTML = dayjs(day.date).format('dddd');
     nextWeekDiv.appendChild(dayDiv);
-    const lunchDiv = document.createElement('div');
-    lunchDiv.id = `lunch-1-${index}`;
-    lunchDiv.classList.add('item');
-    lunchDiv.innerHTML = day.items.join(', ');
-    nextWeekDiv.appendChild(lunchDiv);
+    if (day.holiday) {
+      const lunchDiv = document.createElement('div');
+      lunchDiv.id = `lunch-0-${index}-${itemIdx}`;
+      lunchDiv.classList.add('item');
+      lunchDiv.innerHTML = 'No School - Holiday';
+      nextWeekDiv.appendChild(lunchDiv);
+    } else {
+      day.items.forEach((item, itemIdx) => {
+        const lunchDiv = document.createElement('div');
+        lunchDiv.id = `lunch-1-${index}`;
+        lunchDiv.classList.add('item');
+        lunchDiv.innerHTML = item.food.name;
+        nextWeekDiv.appendChild(lunchDiv);
+      });
+    }
   });
 }
 
