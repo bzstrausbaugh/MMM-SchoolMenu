@@ -19,7 +19,11 @@ const getMenuForWeek = async (startOfWeek) => {
       })
       .then((menuBody) => menuBody.json())
       .then((menu) => {
-        const dailyItems = ['turkey & cheese', 'sun butter & jelly'];
+        const dailyItems = [
+          'turkey & cheese sandwich',
+          'turkey & cheese sub',
+          'sun butter & jelly',
+        ];
         const menuDays = menu.days
           .filter((day) => day.menu_items.length > 0 || day.is_holiday)
           .map((menuDay) => {
