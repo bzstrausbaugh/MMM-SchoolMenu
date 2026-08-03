@@ -19,6 +19,7 @@ const getMenuForWeek = async (startOfWeek) => {
       })
       .then((menuBody) => menuBody.json())
       .then((menu) => {
+        const dailyItems = ['turkey & cheese', 'sun butter & jelly'];
         const menuDays = menu.days
           .filter((day) => day.menu_items.length > 0 || day.is_holiday)
           .map((menuDay) => {
@@ -31,6 +32,8 @@ const getMenuForWeek = async (startOfWeek) => {
                 items: unique(
                   menuDay.menu_items.filter((item) => item.station_id === null),
                   (i) => i.food.name,
+                ).filter(
+                  (item) => !dailyItems.includes(item.food.name.toLowerCase()),
                 ),
               };
             }
