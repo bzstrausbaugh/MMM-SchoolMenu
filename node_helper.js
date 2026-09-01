@@ -20,14 +20,23 @@ const getMenuForWeek = async (startOfWeek) => {
       .then((menuBody) => menuBody.json())
       .then((menu) => {
         const dailyItems = [
-          'turkey & cheese sandwich',
-          'turkey & cheese sub',
+          'turkey & cheese',
           'sun butter & jelly',
+          'turkey-ham & cheese',
         ];
         const menuDays = menu.days
-          .filter((day) => day.menu_items.length > 0 || day.is_holiday)
+          .filter(
+            (day) =>
+              day.menu_items.length > 0 ||
+              day.is_holiday ||
+              (day.menu_items.length === 1 && day.menu_items[0].food === null),
+          )
           .map((menuDay) => {
-            if (menuDay.is_holiday) {
+            if (
+              menuDay.is_holiday ||
+              (menuDay.menu_items.length === 1 &&
+                menuDay.menu_items[0].food === null)
+            ) {
               return { date: menuDay.date, holiday: true, items: [] };
             } else {
               return {
@@ -37,7 +46,10 @@ const getMenuForWeek = async (startOfWeek) => {
                   menuDay.menu_items.filter((item) => item.station_id === null),
                   (i) => i.food.name,
                 ).filter(
-                  (item) => !dailyItems.includes(item.food.name.toLowerCase()),
+                  (item) =>
+                    !item.food.name.toLowerCase().includes(dailyItems[0]) &&
+                    !item.food.name.toLowerCase().includes(dailyItems[1]) &&
+                    !item.food.name.toLowerCase().includes(dailyItems[2]),
                 ),
               };
             }

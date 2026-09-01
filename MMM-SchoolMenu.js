@@ -45,14 +45,14 @@ function updateMenus(payload) {
     nextWeekDiv.appendChild(dayDiv);
     if (day.holiday) {
       const lunchDiv = document.createElement('div');
-      lunchDiv.id = `lunch-0-${index}-${itemIdx}`;
+      lunchDiv.id = `lunch-1-${index}-holiday`;
       lunchDiv.classList.add('item');
       lunchDiv.innerHTML = 'No School - Holiday';
       nextWeekDiv.appendChild(lunchDiv);
     } else {
       day.items.forEach((item, itemIdx) => {
         const lunchDiv = document.createElement('div');
-        lunchDiv.id = `lunch-1-${index}`;
+        lunchDiv.id = `lunch-1-${index}-${itemIdx}`;
         lunchDiv.classList.add('item');
         lunchDiv.innerHTML = item.food.name;
         nextWeekDiv.appendChild(lunchDiv);
