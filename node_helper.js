@@ -1,7 +1,10 @@
 var NodeHelper = require('node_helper');
 var undici = require('undici');
 var dayjs = require('dayjs');
+var isoWeek = require('dayjs/plugin/isoWeek');
 var { unique } = require('radash');
+
+dayjs.extend(isoWeek);
 
 const extractEntreFoodItemsForDay = (menuItems) => {
   const dailyItems = [
@@ -27,6 +30,10 @@ const extractEntreFoodItemsForDay = (menuItems) => {
   return groups[0];
 };
 
+const allLackFood = (day) => {
+  return day.menu_items.filter((item) => item.food !== null).length === 0;
+};
+
 const getMenuForWeek = async (startOfWeek) => {
   //pcsd202.api.nutrislice.com/menu/api/weeks/school/wallin-oaks-elementary-school/menu-type/lunch/2026/08/09/
   https: return new Promise((resolve, reject) => {
@@ -49,20 +56,24 @@ const getMenuForWeek = async (startOfWeek) => {
           'turkey-ham & cheese',
         ];
         const menuDays = menu.days
-          .filter((day) => day.menu_items.length > 0 || day.is_holiday)
+          .filter((day) => dayjs(day.date).isoWeekday() < 6)
+          .filter(
+            (day) =>
+              day.menu_items.length > 0 || day.is_holiday || allLackFood(day),
+          )
           .map((menuDay) => {
             if (
               menuDay.is_holiday ||
-              (menuDay.menu_items.length === 1 &&
-                menuDay.menu_items[0].food === null)
+              (menuDay.menu_items.length > 0 && allLackFood(menuDay))
             ) {
               return { date: menuDay.date, holiday: true, items: [] };
             } else {
               const items = unique(
                 extractEntreFoodItemsForDay(menuDay.menu_items),
-                (i) => i.food.name,
+                (i) => i.food?.name,
               ).filter(
                 (item) =>
+                  item.food &&
                   !item.food.name.toLowerCase().includes(dailyItems[0]) &&
                   !item.food.name.toLowerCase().includes(dailyItems[1]) &&
                   !item.food.name.toLowerCase().includes(dailyItems[2]),
