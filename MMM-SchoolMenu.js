@@ -16,7 +16,7 @@ function updateMenus(payload) {
     thisWeekDiv.appendChild(dayDiv);
     if (day.holiday) {
       const lunchDiv = document.createElement('div');
-      lunchDiv.id = `lunch-0-${index}-${itemIdx}`;
+      lunchDiv.id = `lunch-0-${index}`;
       lunchDiv.classList.add('item');
       lunchDiv.innerHTML = 'No School - Holiday';
       thisWeekDiv.appendChild(lunchDiv);
